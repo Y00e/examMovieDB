@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './styles/index.css';
+import useMovieStore from '../src/stores/movie-store';
+import MovieType from './models/movieType';
+
 
 function App() {
   const [key, setKey] = useState('');
-  const [movies, setMovies] = useState([]);
 
   useEffect (() => {
     axios.get(`http://localhost:8080/api/keys`)
@@ -20,11 +22,21 @@ function App() {
     axios.get(`http://localhost:8080/api/movies?key=${key}`)
     .then(response => {
       console.log('Movies Response:', response.data);
-      setMovies(response.data);
+      useMovieStore.getState().setMovies(response.data);
     });
   }
 
   }, [key]);
+
+    const handleAddMovie = (movie: MovieType) => {
+      axios.post(`http://localhost:8080/api/movies?key=${key}`, movie)
+      .then(response => {
+        useMovieStore.getState().addMovie(response.data)
+      });
+    
+    };
+
+
 
   return (
     <div> 

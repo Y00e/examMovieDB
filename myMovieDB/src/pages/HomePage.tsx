@@ -1,9 +1,14 @@
 import React from 'react'
+import AddMovieForm from '../components/AddMovieForm';
 
-function HomePage() {
+ type homePageProps = {
+    apiKey : string; 
+ }
+
+function HomePage({ apiKey } : homePageProps) {
   return (
     <div>
-      
+      <AddMovieForm apiKey ={ apiKey }/>
     </div>
   )
 }

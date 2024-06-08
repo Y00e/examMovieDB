@@ -3,44 +3,41 @@ import axios from 'axios';
 import './styles/index.css';
 import useMovieStore from '../src/stores/movie-store';
 import MovieType from './models/movieType';
+import MovieList from './components/MovieList';
+import HomePage from './pages/HomePage';
 
 
 function App() {
-  const [key, setKey] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  
 
   useEffect (() => {
     axios.get(`http://localhost:8080/api/keys`)
     .then(response => {
-      console.log('API Key Response:', response.data);
-      setKey(response.data.data);
+      setApiKey(response.data.data);
     });
   }, []);
-
+  
+  
   useEffect (() => {
-    if(key) {
-      console.log('API Key:', key);
-    axios.get(`http://localhost:8080/api/movies?key=${key}`)
+    if(apiKey) {
+      console.log('API Key:', apiKey);
+    axios.get(`http://localhost:8080/api/movies?key=${apiKey}`)
     .then(response => {
-      console.log('Movies Response:', response.data);
-      useMovieStore.getState().setMovies(response.data);
+      console.log('Movies Response:', response.data.data);
+      useMovieStore.getState().setMovies(response.data.data);
     });
   }
 
-  }, [key]);
+  }, [apiKey]);
 
-    const handleAddMovie = (movie: MovieType) => {
-      axios.post(`http://localhost:8080/api/movies?key=${key}`, movie)
-      .then(response => {
-        useMovieStore.getState().addMovie(response.data)
-      });
-    
-    };
 
 
 
   return (
     <div> 
       <h1>Movie App</h1>
+      <HomePage apiKey={ apiKey }/>
     </div>
   )
 }

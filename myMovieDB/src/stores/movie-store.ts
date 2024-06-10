@@ -5,8 +5,8 @@ type MovieStore = {
     movieItems: MovieType[],
     setMovies: (movies : MovieType[]) => void,
     addMovie: (movie : MovieType) => void,
-    toggleFavorite: (imbid : string) => void,
-    deleteMovie: (imbid: string) => void
+    toggleFavorite: (imdbid : string) => void,
+    deleteMovie: (imdbid: string) => void
 
 }
 
@@ -20,12 +20,12 @@ const useMovieStore = create<MovieStore>((set) => ({
     toggleFavorite: (imbid) =>
         set((state) => ({
           movieItems: state.movieItems.map((movie) =>
-            movie.imbid === imbid ? { ...movie, is_favorite: !movie.is_favorite } : movie,
+            movie.imdbid === imbid ? { ...movie, is_favorite: !movie.is_favorite } : movie,
         ),
     })),
-    deleteMovie: (imbid) =>
+    deleteMovie: (imdbid) =>
         set((state) => ({
-          movieItems: state.movieItems.filter((movie) => movie.imbid !== imbid),
+          movieItems: state.movieItems.filter((movie) => movie.imdbid !== imdbid),
     })),
 
 

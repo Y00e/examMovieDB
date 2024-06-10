@@ -1,5 +1,5 @@
 type MovieType = {
-    imbid?: string;
+    imdbid?: string;
     title: string;
     poster: string;
     trailer_link: string;

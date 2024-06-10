@@ -5,6 +5,9 @@ import useMovieStore from '../src/stores/movie-store';
 import MovieType from './models/movieType';
 import MovieList from './components/MovieList';
 import HomePage from './pages/HomePage';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import MovieDetailsPage from './pages/MovieDetailsPage';
+import logo from './assets/logo.png'
 
 
 function App() {
@@ -35,10 +38,19 @@ function App() {
 
 
   return (
-    <div> 
-      <h1>Movie App</h1>
-      <HomePage apiKey={ apiKey }/>
-    </div>
+    <Router>
+      <>
+        <Link to="/">
+        <img src={ logo } alt="Logo" />
+        </Link>
+        
+        <Routes>
+          <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
+          <Route path="/" element={<HomePage apiKey={ apiKey }/>} />
+        </Routes>
+      </>
+      </Router>
+    
   )
 }
 

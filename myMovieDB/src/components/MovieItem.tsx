@@ -1,6 +1,8 @@
 import React from 'react'
 import MovieType from '../models/movieType';
 import useMovieStore from '../stores/movie-store';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 type MovieProps = {
     movie : MovieType;
@@ -15,22 +17,47 @@ function MovieItem({ movie, apiKey }: MovieProps ) {
 
   }));
 
+  const handleToggleFavorite = async () => {
+    if (movie.imdbid && apiKey) {
+        await axios.put(`http://localhost:8080/api/movies/${movie.imdbid}?key=${apiKey}`, {
+          is_favorite: !movie.is_favorite,
+        });
+        toggleFavorite(movie.imdbid);
+    
+    }
+  };
+
+
+    
+  const handleDeleteMovie = async () => {
+    if (movie.imdbid && apiKey) {
+        await axios.delete(`http://localhost:8080/api/movies/${movie.imdbid}?key=${apiKey}`);
+        deleteMovie(movie.imdbid);
+        
+    }
+  };
+
   return (
     <article className="movie">
       <h2 className="movie-title">{ movie.title }</h2>
+      <Link to={`/movie/${movie.imdbid}`}>
       <img className='movie-poster' src={movie.poster} />
-      <a className='movie-trailer-link' href={ movie.trailer_link }></a>
+      </Link>
       <div className="movie-actions">
-        <input 
-          type="checkbox"
-          checked={movie.is_favorite}
-          onChange={() => movie.imbid && toggleFavorite(movie.imbid)}
-         />
-        <button onClick= {() => movie.imbid && deleteMovie(movie.imbid)}>Delete</button>
+      <label className="favorite">
+          <input
+            type="checkbox"
+            checked={movie.is_favorite}
+            onChange={handleToggleFavorite}
+          />
+            Mark as Favorite
+        </label>
+        <button onClick= {handleDeleteMovie}>Delete</button>
       </div>
     </article>
   )
 }
+
 
 
 export default MovieItem;

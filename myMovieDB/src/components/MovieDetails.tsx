@@ -26,26 +26,22 @@ function MovieDetails({ movie, apiKey } : MovieDetailsProps) {
         }
       };
     
-    
-    
-
   return (
     <section className="page-moviedetails">
-        <div className=" moviedetails content-wrapper">
-            <label>
-                <input
-                    type="checkbox"
-                    checked={movie.is_favorite}
-                    onChange={handleToggleFavorite}
-                  />
-                  Mark as Favorite
-            </label>
-            <h2>{movie.title}</h2>
-            <img src={movie.poster} alt={movie.title} />
-            <iframe src={ movie.trailer_link } ></iframe>
+      <div className=" moviedetails content-wrapper">
+        <label>
+          <input
+            type="checkbox"
+              checked={movie.is_favorite}
+              onChange={handleToggleFavorite}
+          />
+          Mark as Favorite
+        </label>
+        <h2>{movie.title}</h2>
+        <img src={movie.poster} alt={movie.title} />
+        <iframe src={ movie.trailer_link } ></iframe>
            
-
-        </div>
+      </div>
     </section>
   )
 }

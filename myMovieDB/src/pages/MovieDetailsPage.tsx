@@ -1,8 +1,6 @@
-import React from 'react';
 import MovieDetails from '../components/MovieDetails';
 import useMovieStore from '../stores/movie-store';
 import { useParams } from 'react-router-dom';
-import MovieType from '../models/movieType';
 
 type MovieDetailsProps = {
     apiKey: string;
@@ -26,4 +24,4 @@ function MovieDetailsPage({ apiKey } : MovieDetailsProps) {
   )
 }
 
-export default MovieDetailsPage
+export default MovieDetailsPage;

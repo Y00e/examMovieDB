@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './styles/index.css';
 import useMovieStore from '../src/stores/movie-store';
-import MovieType from './models/movieType';
-import MovieList from './components/MovieList';
 import HomePage from './pages/HomePage';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MovieDetailsPage from './pages/MovieDetailsPage';

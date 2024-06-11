@@ -17,10 +17,10 @@ const useMovieStore = create<MovieStore>((set) => ({
       set((state) => ({
         movieItems: [...state.movieItems, movie],
     })),
-    toggleFavorite: (imbid) =>
+    toggleFavorite: (imdbid) =>
         set((state) => ({
           movieItems: state.movieItems.map((movie) =>
-            movie.imdbid === imbid ? { ...movie, is_favorite: !movie.is_favorite } : movie,
+            movie.imdbid === imdbid ? { ...movie, is_favorite: !movie.is_favorite } : movie,
         ),
     })),
     deleteMovie: (imdbid) =>

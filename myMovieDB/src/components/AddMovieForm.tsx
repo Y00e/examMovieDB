@@ -20,7 +20,6 @@ function AddMovieForm({ apiKey }: AddMovieFormProps) {
     console.log('Adding new movie:', newMovie);
     
     axios.post(`http://localhost:8080/api/movies?key=${apiKey}`, newMovie)
-    
         .then(response => {
             addMovie(response.data.data);
             setTitle('');

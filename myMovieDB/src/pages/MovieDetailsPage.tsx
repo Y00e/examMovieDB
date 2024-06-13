@@ -1,6 +1,7 @@
 import MovieDetails from '../components/MovieDetails';
 import useMovieStore from '../stores/movie-store';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 type MovieDetailsProps = {
     apiKey: string;
@@ -18,7 +19,10 @@ function MovieDetailsPage({ apiKey } : MovieDetailsProps) {
 
   return (
     <div>
-        {selectedmovie && <MovieDetails movie={selectedmovie} apiKey={apiKey} />}
+      <Link to="/home">
+        <img src={ logo } alt="Logo" />
+      </Link>
+      {selectedmovie && <MovieDetails movie={selectedmovie} apiKey={apiKey} />}
       
     </div>
   )

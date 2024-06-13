@@ -6,9 +6,16 @@ import HomePage from './pages/HomePage';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import logo from './assets/logo.png'
+import LoginPage from './pages/LoginPage';
+import useSessionStore from './stores/session-store';
+import LogoutForm from './components/LogoutForm';
+
+
+
 
 
 function App() {
+  const{isLoggedIn} = useSessionStore();
   const [apiKey, setApiKey] = useState('');
   
 
@@ -38,13 +45,10 @@ function App() {
   return (
     <Router>
       <>
-        <Link to="/">
-        <img src={ logo } alt="Logo" />
-        </Link>
-        
         <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage apiKey={ apiKey }/>} />
           <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
-          <Route path="/" element={<HomePage apiKey={ apiKey }/>} />
         </Routes>
       </>
       </Router>

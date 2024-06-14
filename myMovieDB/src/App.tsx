@@ -15,7 +15,6 @@ import LogoutForm from './components/LogoutForm';
 
 
 function App() {
-  const{isLoggedIn} = useSessionStore();
   const [apiKey, setApiKey] = useState('');
   
 
@@ -46,7 +45,7 @@ function App() {
     <Router>
       <>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage apiKey={ apiKey } />} />
           <Route path="/home" element={<HomePage apiKey={ apiKey }/>} />
           <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
         </Routes>

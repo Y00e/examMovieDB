@@ -4,6 +4,7 @@ import useMovieStore from '../stores/movie-store';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 type MovieProps = {
     movie : MovieType;
     apiKey: string;

@@ -20,7 +20,7 @@ function LogoutForm() {
   };
 
   return (
-    <div>
+    <div className="logout-btn">
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

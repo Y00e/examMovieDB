@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import logo from './assets/logo.png'
 import LoginPage from './pages/LoginPage';
-import useSessionStore from './stores/session-store';
 import LogoutForm from './components/LogoutForm';
 
 
@@ -42,15 +41,19 @@ function App() {
 
 
   return (
-    <Router>
-      <>
+    
+      <Router>
         <Routes>
-          <Route path="/" element={<LoginPage apiKey={ apiKey } />} />
-          <Route path="/home" element={<HomePage apiKey={ apiKey }/>} />
-          <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
+        <Route path="/" element={<LoginPage />} />
+        {sessionStorage.getItem('user') ? (
+          <>
+            <Route path="/home" element={<HomePage apiKey={apiKey} />} />
+            <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
+          </>
+        ) : null}
         </Routes>
-      </>
       </Router>
+    
     
   )
 }

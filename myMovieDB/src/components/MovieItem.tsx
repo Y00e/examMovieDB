@@ -3,6 +3,7 @@ import MovieType from '../models/movieType';
 import useMovieStore from '../stores/movie-store';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../styles/componentStylse/movieItem.css'
 
 
 type MovieProps = {

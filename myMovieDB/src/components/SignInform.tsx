@@ -1,22 +1,28 @@
-import React, {FormEvent, useState} from 'react'
-import useSessionStore from '../stores/session-store';
-import useUserStore from '../stores/user-store';
+import React, {FormEvent, useEffect, useState} from 'react'
 import UserType from '../models/userType';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function SignInForm() {
-  const { login, isLoggedIn, logout } = useSessionStore();
-  const { addUser } = useUserStore();
+  
   const navigate = useNavigate();
   const [signupUsername, setSignupUsername] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
- 
+  useEffect(() => {
+    if (isLoggedIn()) {
+      navigate('/home');
+    } 
+  }, [navigate]);
 
- 
+
+  const isLoggedIn = () => {
+    return sessionStorage.getItem('user') !== null;
+  };
+
+
   const handleSignup = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -25,7 +31,6 @@ function SignInForm() {
     axios.post(`http://localhost:8080/api/auth/register`, newUser)
       .then(response => {
       console.log(response.data);
-      addUser(newUser);
       setSignupUsername('');
       setSignupPassword('');
       
@@ -44,14 +49,13 @@ function SignInForm() {
     axios.post(`http://localhost:8080/api/auth/login`, user)
     .then(response => {
       console.log('Login user:', response.data);
-      login(user);
+      sessionStorage.setItem('user', JSON.stringify(response.data));
       navigate('/home');
     });
     
   };
-  
 
-  
+
   
   return (
     

@@ -1,0 +1,25 @@
+.movie {
+    background-color: rgb(49, 47, 47);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+}
+
+.movie-title {
+    color: white;
+}
+
+.movie-actions {
+    display: flex;
+    width: 100%;
+    gap: 5.5rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.favorite {
+    color: white;
+
+}

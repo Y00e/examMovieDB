@@ -1,9 +1,12 @@
 import React, {FormEvent, useEffect, useState} from 'react'
-import UserType from '../models/userType';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function SignInForm() {
+type SignInFormPorps = {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+}
+
+function SignInForm({setIsLoggedIn}: SignInFormPorps) {
   
   const navigate = useNavigate();
   const [signupUsername, setSignupUsername] = useState('');
@@ -11,17 +14,8 @@ function SignInForm() {
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
-  useEffect(() => {
-    if (isLoggedIn()) {
-      navigate('/home');
-    } 
-  }, [navigate]);
 
-
-  const isLoggedIn = () => {
-    return sessionStorage.getItem('user') !== null;
-  };
-
+  
 
   const handleSignup = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,12 +41,15 @@ function SignInForm() {
 
     const user = {username: loginUsername, password: loginPassword};
     axios.post(`http://localhost:8080/api/auth/login`, user)
-    .then(response => {
-      console.log('Login user:', response.data);
-      sessionStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/home');
-    });
-    
+      .then(response => {
+        console.log('Login response:', response.data);
+        sessionStorage.setItem('user', JSON.stringify(response.data));
+        setIsLoggedIn(true);
+        navigate('/home');
+      })
+      .catch(error => {
+        console.error('Login error:', error);
+      });
   };
 
 
@@ -61,7 +58,7 @@ function SignInForm() {
     
     <>
       <form onSubmit={handleLogin}>
-        <h3>Login</h3>
+        <h3 className="login">Login</h3>
       <input 
         type="text" 
         name="username" 
@@ -82,7 +79,7 @@ function SignInForm() {
       </form>
 
       <form onSubmit={handleSignup}>
-      <h3>Signup</h3>
+      <h3 className="signup">Signup</h3>
       <input 
         type="text" 
         name="username" 

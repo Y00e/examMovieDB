@@ -2,6 +2,7 @@ import React from 'react'
 import MovieType from '../models/movieType';
 import useMovieStore from '../stores/movie-store';
 import axios from 'axios';
+import '../styles/pageStylse/movieDetailsPage.css'
 
 type MovieDetailsProps = {
     movie: MovieType;
@@ -27,7 +28,7 @@ function MovieDetails({ movie, apiKey } : MovieDetailsProps) {
       };
     
   return (
-    <section className="page-moviedetails">
+    <article className="page-moviedetails">
       <div className=" moviedetails content-wrapper">
         <label>
           <input
@@ -42,7 +43,7 @@ function MovieDetails({ movie, apiKey } : MovieDetailsProps) {
         <iframe src={ movie.trailer_link } ></iframe>
            
       </div>
-    </section>
+    </article>
   )
 }
 

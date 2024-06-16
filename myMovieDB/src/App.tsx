@@ -3,19 +3,26 @@ import axios from 'axios';
 import './styles/index.css';
 import useMovieStore from '../src/stores/movie-store';
 import HomePage from './pages/HomePage';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import logo from './assets/logo.png'
 import LoginPage from './pages/LoginPage';
 import LogoutForm from './components/LogoutForm';
+import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
+import './styles/index.css';
 
 
+const isLoggedIn = () => {
+  const user = sessionStorage.getItem('user');
+  return user !== null;
+}
 
 
 
 function App() {
   const [apiKey, setApiKey] = useState('');
-  
+  const [loggedIn, setIsLoggedIn] = useState(isLoggedIn());
+
+
 
   useEffect (() => {
     axios.get(`http://localhost:8080/api/keys`)
@@ -41,20 +48,14 @@ function App() {
 
 
   return (
-    
-      <Router>
-        <Routes>
-        <Route path="/" element={<LoginPage />} />
-        {sessionStorage.getItem('user') ? (
-          <>
-            <Route path="/home" element={<HomePage apiKey={apiKey} />} />
-            <Route path="/movie/:imdbid" element={<MovieDetailsPage apiKey={apiKey} />} />
-          </>
-        ) : null}
-        </Routes>
-      </Router>
-    
-    
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/home" element={isLoggedIn() ? <HomePage apiKey={apiKey} /> : <Navigate to="/" replace />} />
+        <Route path="/movie/:imdbid" element={isLoggedIn() ? <MovieDetailsPage apiKey={apiKey} /> : <Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -10,6 +10,7 @@ import '../styles/pageStylse/homePage.css'
  }
 
 function HomePage({ apiKey } : homePageProps) {
+
   return (
     <div className="home-page">
         <img src={logo} alt="Logo" />

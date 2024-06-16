@@ -1,5 +1,4 @@
 import React from 'react';
-import UserType from '../models/userType';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 

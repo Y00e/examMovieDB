@@ -4,11 +4,9 @@ import './styles/index.css';
 import useMovieStore from '../src/stores/movie-store';
 import HomePage from './pages/HomePage';
 import MovieDetailsPage from './pages/MovieDetailsPage';
-import logo from './assets/logo.png'
-import LoginPage from './pages/LoginPage';
-import LogoutForm from './components/LogoutForm';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 import './styles/index.css';
+import LoginPage from './pages/loginPage';
 
 
 const isLoggedIn = () => {

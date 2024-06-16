@@ -1,7 +1,8 @@
 import React from 'react'
-import SignInForm from '../components/SignInForm';
+import '../components/SignInform'
 import logo from '../assets/logo.png';
 import '../styles/pageStylse/loginPage.css'
+import SignInForm from '../components/SignInform';
 
 type LoginPageProps = {
   setIsLoggedIn : (isLoggedIn: boolean) => void;
